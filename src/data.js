@@ -1,0 +1,40 @@
+// Janela: GLs tailandeses com final entre 01/11/2025 e 01/11/2026.
+// "fim" só está preenchido onde confirmei; CONFIRA os demais no MyDramaList antes de abrir a votação.
+export const shows = [
+  { id: 'player', t: 'Player', eps: 12, fim: '2025-12-19' },
+  { id: 'runaway', t: 'Runaway', eps: 8 },
+  { id: 'like-a-palette', t: 'Like a Palette', eps: 8, fim: '2026-01-17' },
+  { id: 'muteluv', t: 'MuTeLuv: Hello, Is This Luck?' },
+  { id: 'heart-code', t: 'Heart Code', eps: 7 },
+  { id: 'girl-rules', t: 'Girl Rules', eps: 12 },
+  { id: 'play-park', t: 'Play Park', eps: 8 },
+  { id: 'my-only-sunshine', t: 'My Only Sunshine', eps: 8 },
+  { id: 'be-my-angel', t: 'Be My Angel', eps: 8 },
+  { id: 'sup-tar', t: "I Wanna Be Sup'tar", eps: 8 },
+  { id: 'frozen-valentine', t: 'Frozen Valentine', eps: 10 },
+  { id: 'the-earth', t: 'The Earth (4Elements)', eps: 8 },
+  { id: 'the-water', t: 'The Water (4Elements)', eps: 8 },
+  { id: 'the-air', t: 'The Air (4Elements)', eps: 8 },
+  { id: 'the-fire', t: 'The Fire (4Elements)', eps: 8, fim: '2026-08-29' },
+  { id: 'broken-of-love', t: 'Broken of Love', eps: 8 },
+  { id: 'shades', t: 'Shades', eps: 6 },
+  { id: 'hometown-romance', t: 'Hometown Romance', eps: 8 },
+  { id: 'love-beyond-dreams', t: 'Love Beyond Dreams', eps: 7 },
+  { id: 'ai-girl', t: 'AI Girl', eps: 7 },
+  { id: 'juliet-juliet', t: 'Juliet & Juliet', eps: 8 },
+  { id: 'pls-love', t: 'Pls Love', eps: 8 },
+  { id: 'khom-khlang', t: 'Khom Khlang', eps: 10 },
+  { id: 'fulfill', t: 'Fulfill', eps: 8 },
+]
+// tipo 'serie' = vota nos títulos acima; 'aberta' = indicação livre (casais, atrizes etc.)
+export const categories = [
+  { id: 'melhor-gl', nome: 'Melhor GL do Ano', emoji: '👑', tipo: 'serie' },
+  { id: 'melhor-roteiro', nome: 'Melhor Roteiro', emoji: '✍️', tipo: 'serie' },
+  { id: 'melhor-trilha', nome: 'Melhor Trilha Sonora', emoji: '🎶', tipo: 'serie' },
+  { id: 'melhor-final', nome: 'Melhor Final', emoji: '🌅', tipo: 'serie' },
+  { id: 'plot-twist', nome: 'Maior Plot Twist', emoji: '🌀', tipo: 'serie' },
+  { id: 'melhor-casal', nome: 'Melhor Casal', emoji: '💞', tipo: 'aberta', dica: 'Ex.: Atriz A & Atriz B' },
+  { id: 'melhor-atriz', nome: 'Melhor Atriz', emoji: '🎭', tipo: 'aberta', dica: 'Nome da atriz' },
+  { id: 'revelacao', nome: 'Revelação do Ano', emoji: '✨', tipo: 'aberta', dica: 'Nome da atriz' },
+  { id: 'melhor-beijo', nome: 'Melhor Beijo', emoji: '💋', tipo: 'aberta', dica: 'Série + episódio' },
+]

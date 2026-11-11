@@ -1,0 +1,23 @@
+:root{--r:#D52D00;--o:#EF7627;--p:#D162A4;--d:#A30262;--bg:#fff7fb;--ink:#2a1020}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,sans-serif}
+header{text-align:center;padding:2.5rem 1rem 1.5rem;color:#fff;background:linear-gradient(135deg,var(--r),var(--o) 30%,var(--p) 70%,var(--d))}
+h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(2.4rem,8vw,4rem);margin:0}
+header p{margin:.3rem 0 1rem;opacity:.95}
+nav{display:inline-flex;gap:.4rem;background:#0003;padding:.3rem;border-radius:99px}
+nav button{border:0;background:none;color:#fff;padding:.5rem 1.2rem;border-radius:99px;font-weight:600;cursor:pointer}
+nav .on{background:#fff;color:var(--d)}
+main{max-width:760px;margin:1.5rem auto;padding:0 1rem;display:grid;gap:1rem}
+.card{background:#fff;border-radius:20px;padding:1.2rem;box-shadow:0 6px 24px #a3026214;border:1px solid #f3d3e6}
+h2{font-family:Fraunces,serif;margin:0 0 .8rem;color:var(--d)}
+.opts{display:flex;flex-wrap:wrap;gap:.45rem}
+.opt{border:1.5px solid var(--p);background:#fff;color:var(--d);padding:.4rem .8rem;border-radius:99px;cursor:pointer;font:inherit;font-size:.9rem}
+.opt.on{background:linear-gradient(135deg,var(--o),var(--p));color:#fff;border-color:transparent}
+input{width:100%;padding:.7rem 1rem;border:1.5px solid var(--p);border-radius:12px;font:inherit}
+.go{margin-top:.9rem;border:0;padding:.65rem 1.6rem;border-radius:99px;color:#fff;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--r),var(--d))}
+.go:disabled{opacity:.4;cursor:not-allowed}
+.ok,.msg{color:var(--d)}.muted{color:#8a6a7c}
+.demo{background:#fff0d9;padding:.6rem 1rem;border-radius:12px;font-size:.9rem;margin:0}
+.bar{position:relative;display:flex;justify-content:space-between;padding:.5rem .8rem;margin:.35rem 0;border-radius:10px;background:#fbe9f3;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#f7b27f,#e9a1cc);opacity:.7}
+.bar span,.bar b{position:relative}
+footer{text-align:center;padding:2rem 1rem;color:#8a6a7c;font-size:.85rem}
