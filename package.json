@@ -7,7 +7,8 @@
   "dev": "vite",
   "build": "vite build",
   "preview": "vite preview",
-"tmdb": "node --env-file=.env scripts/fetch-tmdb.mjs" },
+  "tmdb": "node scripts/fetch-tmdb.mjs" 
+ },
  "dependencies": {
   "@supabase/supabase-js": "^2.45.0",
   "react": "^18.3.1",
