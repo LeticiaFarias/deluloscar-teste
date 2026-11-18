@@ -6,7 +6,7 @@ import { seed } from '../src/seed.js'
 const TOKEN = process.env.TMDB_TOKEN
 if (!TOKEN) { console.log('TMDB_TOKEN ausente: mantendo src/shows.json como está.'); process.exit(0) }
 
-const INI = '2025-11-01', FIM = '2026-11-01'
+const INI = '2025-11-01', FIM = '2026-11-30'
 const api = async (p) => {
   const r = await fetch('https://api.themoviedb.org/3' + p, { headers: { Authorization: `Bearer ${TOKEN}` } })
   if (!r.ok) throw new Error(`${p} -> ${r.status}`)
@@ -28,7 +28,8 @@ for (const s of seed) {
       fim: fim || s.fim,
       poster: d.poster_path ? 'https://image.tmdb.org/t/p/w342' + d.poster_path : null,
       sinopse: d.overview || '',
-      elenco: (d.aggregate_credits?.cast || []).slice(0, 3).map((c) => c.name),
+      // TMDB gender 1 = feminino. As duas primeiras (por nº de episódios) formam o casal principal.
+      elenco: (d.aggregate_credits?.cast || []).filter((c) => c.gender === 1).slice(0, 2).map((c) => c.name),
       // só marca inelegível quando o TMDB tem data de final e ela está fora da janela
       ...(fim ? { elegivel: fim >= INI && fim <= FIM } : {}),
     }

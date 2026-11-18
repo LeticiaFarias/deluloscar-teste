@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { shows, categories } from './data'
+import { categories, opcoesDe } from './data'
 import { vote, results, demo } from './db'
 
 function Categoria({ cat, onVoted }) {
   const [sel, setSel] = useState('')
   const [msg, setMsg] = useState('')
+  const opcoes = opcoesDe(cat.tipo)
   const done = localStorage.getItem('v:' + cat.id)
   const enviar = async () => {
     try { await vote(cat.id, sel); localStorage.setItem('v:' + cat.id, sel); setMsg('Voto registrado! 💖'); onVoted() }
@@ -14,12 +15,14 @@ function Categoria({ cat, onVoted }) {
     <section className="card">
       <h2><span>{cat.emoji}</span> {cat.nome}</h2>
       {done ? <p className="ok">Você já votou aqui. Obrigada! 💖</p> : <>
-        {cat.tipo === 'serie' ? (
-          <div className="opts">{shows.map((s) => (
-            <button key={s.id} className={sel === s.t ? 'opt on' : 'opt'} onClick={() => setSel(s.t)}>{s.poster && <img src={s.poster} alt="" />}{s.t}</button>
-          ))}</div>
-        ) : <input placeholder={cat.dica} value={sel} maxLength={80} onChange={(e) => setSel(e.target.value)} />}
-        <button className="go" disabled={!sel.trim()} onClick={enviar}>Votar</button>
+        {opcoes.length === 0 && <p className="muted">Sem indicadas ainda. Rode <code>npm run tmdb</code> para carregar o elenco.</p>}
+        <div className="opts">{opcoes.map((o) => (
+          <button key={o.label} className={sel === o.label ? 'opt on' : 'opt'} onClick={() => setSel(o.label)}>
+            {o.poster && <img src={o.poster} alt="" />}
+            <span>{o.label}{o.sub && <small>{o.sub}</small>}</span>
+          </button>
+        ))}</div>
+        <button className="go" disabled={!sel} onClick={enviar}>Votar</button>
         {msg && <p className="msg">{msg}</p>}
       </>}
     </section>

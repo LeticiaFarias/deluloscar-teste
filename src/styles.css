@@ -23,3 +23,4 @@ input{width:100%;padding:.7rem 1rem;border:1.5px solid var(--p);border-radius:12
 footer{text-align:center;padding:2rem 1rem;color:#8a6a7c;font-size:.85rem}
 
 .opt{display:inline-flex;align-items:center;gap:.5rem}.opt img{width:28px;height:42px;object-fit:cover;border-radius:4px}
+.opt span{display:flex;flex-direction:column;text-align:left}.opt small{font-size:.72rem;opacity:.75}
