@@ -1,0 +1,1 @@
+import {Router} from "express";import {list,detail} from "../controllers/category-controller.js";export const categoryRoutes=Router();categoryRoutes.get("/",list);categoryRoutes.get("/:slug",detail);

@@ -1,0 +1,1 @@
+import type {CategoryResult,VotingState} from "../models";import {apiRequest} from "./api-client";export const adminService={results:()=>apiRequest<CategoryResult[]>("/admin/results"),state:()=>apiRequest<VotingState>("/admin/voting-state"),update:(state:VotingState)=>apiRequest<VotingState>("/admin/voting-state",{method:"PATCH",body:JSON.stringify(state)})};

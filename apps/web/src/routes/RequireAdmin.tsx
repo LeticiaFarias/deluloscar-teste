@@ -1,0 +1,1 @@
+import {Navigate,Outlet} from "react-router-dom";import {useAuth} from "../viewmodels/auth-context";export function RequireAdmin(){const {state}=useAuth();if(!state.user)return <Navigate to="/login" replace/>;return state.user.role==="admin"?<Outlet/>:<Navigate to="/" replace/>;}

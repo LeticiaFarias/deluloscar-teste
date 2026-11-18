@@ -1,0 +1,4 @@
+import type {RequestHandler} from "express";import {voteService} from "../services/vote-service.js";import {adminService} from "../services/admin-service.js";
+export const cast:RequestHandler=async(req,res,next)=>{try{res.json(await voteService.cast(req.auth!.userId,req.body.nomineeId));}catch(e){next(e);}};
+export const mine:RequestHandler=async(req,res,next)=>{try{res.json(await voteService.mine(req.auth!.userId));}catch(e){next(e);}};
+export const results:RequestHandler=async(_q,res,next)=>{try{const s=await adminService.state();if(!s.resultsPublished)return res.status(403).json({message:"em apuração"});res.json((await voteService.results()).map(({categoryId,categoryName,winner,totalVotes})=>({categoryId,categoryName,winner,totalVotes})));}catch(e){next(e);}};

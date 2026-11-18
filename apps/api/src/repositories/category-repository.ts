@@ -1,0 +1,1 @@
+import {prisma} from "../lib/prisma.js";export const categoryRepository={findAll:()=>prisma.category.findMany({orderBy:{displayOrder:"asc"},include:{nominees:{orderBy:{name:"asc"}}}}),findBySlug:(slug:string)=>prisma.category.findUnique({where:{slug},include:{nominees:{orderBy:{name:"asc"}}}})};

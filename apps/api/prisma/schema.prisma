@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+enum Role {
+  USER @map("user")
+  ADMIN @map("admin")
+  @@map("role")
+}
+enum VotingStatus {
+  OPEN @map("open")
+  CLOSED @map("closed")
+  @@map("voting_status")
+}
+model User {
+  id String @id @default(uuid()) @db.Uuid
+  name String @db.VarChar(100)
+  email String @unique @db.VarChar(255)
+  passwordHash String @map("password_hash")
+  role Role @default(USER)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  votes Vote[]
+  @@map("users")
+}
+model Category {
+  id String @id @default(uuid()) @db.Uuid
+  name String @db.VarChar(120)
+  slug String @unique @db.VarChar(140)
+  description String @default("")
+  displayOrder Int @default(0) @map("display_order")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  nominees Nominee[]
+  votes Vote[]
+  @@map("categories")
+}
+model Nominee {
+  id String @id @default(uuid()) @db.Uuid
+  categoryId String @map("category_id") @db.Uuid
+  name String @db.VarChar(160)
+  description String @default("")
+  imageUrl String? @map("image_url")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  votes Vote[]
+  @@unique([categoryId, name])
+  @@index([categoryId])
+  @@map("nominees")
+}
+model Vote {
+  id String @id @default(uuid()) @db.Uuid
+  userId String @map("user_id") @db.Uuid
+  categoryId String @map("category_id") @db.Uuid
+  nomineeId String @map("nominee_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  nominee Nominee @relation(fields: [nomineeId], references: [id], onDelete: Cascade)
+  @@unique([userId, categoryId])
+  @@index([categoryId, nomineeId])
+  @@map("votes")
+}
+model VotingState {
+  id Boolean @id @default(true)
+  status VotingStatus @default(OPEN)
+  resultsPublished Boolean @default(false) @map("results_published")
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  @@map("voting_state")
+}

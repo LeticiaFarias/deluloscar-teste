@@ -1,0 +1,1 @@
+export function VoteButton({onClick,loading,disabled,label="Confirmar voto"}:{onClick:()=>void;loading:boolean;disabled:boolean;label?:string}){return <button type="button" onClick={onClick} disabled={disabled||loading} className="w-full rounded-xl bg-accent px-5 py-3 font-semibold text-white disabled:opacity-50">{loading?"Enviando...":label}</button>;}
