@@ -1,0 +1,1 @@
+import {Router} from "express";import {register,login} from "../controllers/auth-controller.js";import {validateBody} from "../middlewares/validate.js";import {registerSchema,loginSchema} from "@deluloscar/shared";export const authRoutes=Router();authRoutes.post("/register",validateBody(registerSchema),register);authRoutes.post("/login",validateBody(loginSchema),login);

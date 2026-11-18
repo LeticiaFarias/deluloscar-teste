@@ -1,0 +1,1 @@
+import type {RequestHandler} from "express";import {categoryService} from "../services/category-service.js";export const list:RequestHandler=async(_q,res,next)=>{try{res.json(await categoryService.list());}catch(e){next(e);}};export const detail:RequestHandler=async(req,res,next)=>{try{res.json(await categoryService.detail(req.params.slug??""));}catch(e){next(e);}};

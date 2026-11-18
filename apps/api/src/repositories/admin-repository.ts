@@ -1,0 +1,1 @@
+import {prisma} from "../lib/prisma.js";export const adminRepository={state:()=>prisma.votingState.findUnique({where:{id:true}}),update:(status:"OPEN"|"CLOSED",resultsPublished:boolean)=>prisma.votingState.update({where:{id:true},data:{status,resultsPublished}})};

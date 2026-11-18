@@ -1,0 +1,1 @@
+import "dotenv/config"; import {z} from "zod"; export const env=z.object({DATABASE_URL:z.string().min(1),JWT_SECRET:z.string().min(32),PORT:z.coerce.number().int().positive().default(3333),CORS_ORIGIN:z.string().default("http://localhost:5173"),JWT_EXPIRES_IN:z.string().default("2h")}).parse(process.env);

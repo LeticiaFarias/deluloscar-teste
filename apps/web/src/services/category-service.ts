@@ -1,0 +1,1 @@
+import type {Category} from "../models";import {apiRequest} from "./api-client";export const categoryService={list:()=>apiRequest<Category[]>("/categories"),detail:(slug:string)=>apiRequest<Category>("/categories/"+encodeURIComponent(slug))};

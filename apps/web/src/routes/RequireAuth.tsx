@@ -1,0 +1,1 @@
+import {Navigate,Outlet,useLocation} from "react-router-dom";import {useAuth} from "../viewmodels/auth-context";export function RequireAuth(){const {state}=useAuth(),location=useLocation();return state.user?<Outlet/>:<Navigate to="/login" replace state={{from:location.pathname}}/>;}

@@ -1,0 +1,1 @@
+import {categoryRepository} from "../repositories/category-repository.js";import {HttpError} from "../utils/http-error.js";export const categoryService={list:()=>categoryRepository.findAll(),detail:async(slug:string)=>{const c=await categoryRepository.findBySlug(slug);if(!c)throw new HttpError(404,"Categoria não encontrada.");return c;}};

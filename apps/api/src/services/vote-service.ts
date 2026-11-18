@@ -1,0 +1,6 @@
+import {prisma} from "../lib/prisma.js";import {voteRepository} from "../repositories/vote-repository.js";import {HttpError} from "../utils/http-error.js";
+export const voteService={
+ mine:(id:string)=>voteRepository.mine(id),
+ cast:async(userId:string,nomineeId:string)=>{const n=await prisma.nominee.findUnique({where:{id:nomineeId},select:{categoryId:true}});if(!n)throw new HttpError(404,"Indicado não encontrado.");const r=await voteRepository.save(userId,n.categoryId,nomineeId);if("closed" in r&&r.closed)throw new HttpError(409,"A votação está encerrada.");if("invalid" in r&&r.invalid)throw new HttpError(400,"Indicado inválido.");return r.vote;},
+ results:async()=>{const rows=await voteRepository.aggregate();return rows.map(c=>{const nominees=c.nominees.map(n=>({id:n.id,name:n.name,description:n.description,imageUrl:n.imageUrl,voteCount:n._count.votes}));const totalVotes=nominees.reduce((s,n)=>s+n.voteCount,0);const max=Math.max(0,...nominees.map(n=>n.voteCount));const winner=max?nominees.filter(n=>n.voteCount===max):[];return {categoryId:c.id,categoryName:c.name,nominees:nominees.map(n=>({...n,percentage:totalVotes?Math.round(n.voteCount/totalVotes*1000)/10:0})),winner,totalVotes};});}
+};

@@ -1,0 +1,1 @@
+export function StatusMessage({children,tone="muted"}:{children:React.ReactNode;tone?:"error"|"success"|"muted"}){const styles={error:"bg-red-50 text-red-700",success:"bg-emerald-50 text-emerald-700",muted:"bg-white text-slate-600"};return <p role="status" className={`rounded-xl px-4 py-3 text-sm ${styles[tone]}`}>{children}</p>;}

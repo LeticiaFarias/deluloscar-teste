@@ -1,0 +1,1 @@
+import type {RequestHandler} from "express";import type {ZodType} from "zod";import {HttpError} from "../utils/http-error.js";export const validateBody=(schema:ZodType):RequestHandler=>(req,_res,next)=>{const r=schema.safeParse(req.body);if(!r.success)return next(new HttpError(400,r.error.issues.map(x=>x.message).join("; ")));req.body=r.data;next();};

@@ -1,0 +1,9 @@
+import {createContext,useContext,useMemo,useState} from "react";import type {AuthUser} from "../models";import {authService} from "../services/auth-service";
+type State={user:AuthUser|null;loading:boolean;error:string|null};type Context={state:State;actions:{login:(e:string,p:string)=>Promise<boolean>;register:(n:string,e:string,p:string)=>Promise<boolean>;logout:()=>void}};
+const C=createContext<Context|null>(null);function stored():AuthUser|null{try{const s=localStorage.getItem("deluloscar_user");return s?JSON.parse(s) as AuthUser:null;}catch{return null;}}
+export function AuthProvider({children}:{children:React.ReactNode}){const [state,setState]=useState<State>({user:stored(),loading:false,error:null});
+const save=(r:Awaited<ReturnType<typeof authService.login>>)=>{localStorage.setItem("deluloscar_token",r.token);localStorage.setItem("deluloscar_user",JSON.stringify(r.user));setState({user:r.user,loading:false,error:null});};
+const run=async(fn:()=>ReturnType<typeof authService.login>)=>{setState(s=>({...s,loading:true,error:null}));try{save(await fn());return true;}catch(e){setState(s=>({...s,loading:false,error:e instanceof Error?e.message:"Erro inesperado."}));return false;}};
+const value=useMemo<Context>(()=>({state,actions:{login:(e,p)=>run(()=>authService.login(e,p)),register:(n,e,p)=>run(()=>authService.register(n,e,p)),logout:()=>{localStorage.removeItem("deluloscar_token");localStorage.removeItem("deluloscar_user");setState({user:null,loading:false,error:null});}}}),[state]);
+return <C.Provider value={value}>{children}</C.Provider>;}
+export function useAuth(){const c=useContext(C);if(!c)throw Error("AuthProvider ausente.");return c;}
